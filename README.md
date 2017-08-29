@@ -1,2 +1,2 @@
-# rhezabudiono.github.io
+# rhezab.github.io
 Rheza Budiono's blog. 
