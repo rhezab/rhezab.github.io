@@ -1,0 +1,12 @@
+# site settings
+title: Rheza Budiono's blog
+email: rheza@uchicago.edu
+description: ""
+url: "http://rhezab.github.io"
+github_username: rhezab
+
+# build settings
+markdown: python-markdown-parser
+permalink: pretty
+
+
