@@ -4,7 +4,7 @@ email: rheza@uchicago.edu
 description: ""
 url: "http://rhezab.github.io"
 github_username: rhezab
-google_analytics: UA-105596202-1
+medium_username: rhezab
 
 # build settings
 markdown: python-markdown-parser
