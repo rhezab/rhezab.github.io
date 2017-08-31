@@ -4,10 +4,15 @@ email: rheza@uchicago.edu
 description: ""
 url: "http://rhezab.github.io"
 github_username: rhezab
+gitlab_username: rhezab
 medium_username: rhezab
 
 # build settings
-markdown: python-markdown-parser
+markdown: kramdown
 permalink: pretty
 
-
+highlighter: rouge
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter: rouge

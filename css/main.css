@@ -28,10 +28,19 @@ a:visited { color: #205caa; }
 .wrap:after { content:""; display:table; }
 .wrap:after { clear: both; }
 .wrap {
+  max-width: 435px;
+  padding: 0;
+  margin-top: 0px;
+  margin-left: 100px;
+  margin-right: auto;
+  margin-bottom: 0px;
+
+/*
   max-width: 600px;
   padding: 0 30px;
   margin: 0 auto;
   zoom: 1;
+*/
 }
 
 
@@ -122,6 +131,7 @@ a:visited { color: #205caa; }
   color: #828282;
 }
 
+.gitlab-icon-svg,
 .medium-icon-svg,
 .github-icon-svg,
 .twitter-icon-svg {
@@ -138,7 +148,7 @@ a:visited { color: #205caa; }
 
 .page-content {
   padding: 30px 0;
-  background-color: #fff;
+  background-color: #fdf6e3; /* #fff53b */ /* #fff */
 }
 
 
@@ -182,7 +192,14 @@ a:visited { color: #205caa; }
   margin-top: 5px;
 }
 
-.post-content { margin: 0 0 30px; }
+.post-content { 
+    margin: 0 0 30px;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: small;
+    color: #333;
+    /* color: #586e75; //lighter gray */
+    /* color: #586e75; //darker gray */
+}
 
 .post-content > * { margin: 20px 0; }
 
@@ -224,7 +241,7 @@ a:visited { color: #205caa; }
 }
 
 .post-content ul,
-.post-content ol { padding-left: 20px; }
+.post-content ol { padding-left: 20px; } /* 20px; } */
 
 .post pre,
 .post code {
@@ -272,6 +289,13 @@ a:visited { color: #205caa; }
   font-size: 14px;
   text-align: center;
 }
+
+.imgcapleft {
+  color: #555;
+  font-size: 14px;
+  text-align: left;
+}
+
 
 .svgdiv {
   width: 100%;

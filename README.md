@@ -1,6 +1,9 @@
 # rhezab.github.io
 Rheza Budiono's blog. 
 
+[Jekyll](https://jekyllrb.com/) is lets web noobs like me have neat-looking blogs. If you want to have a neat-looking blog of your own, here's how I did it:
+
 * Got started with Jekyll using [this tutorial](http://jmcglone.com/guides/github-pages/#css).
-* Figured out how to build a local Jekyll site with [this tutorial](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/#step-4-build-your-local-jekyll-site).
-* Used [Karpathy's blog](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/#step-4-build-your-local-jekyll-site) as a template - I hope you don't mind. 
+* Figured out how to build a local Jekyll site (so I could see changes locally before committing them) with [this tutorial](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/#step-4-build-your-local-jekyll-site).
+* Used [Karpathy's blog](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/#step-4-build-your-local-jekyll-site) as a template - I hope you don't mind.
+* Used [Paul Graham's website](http://paulgraham.com/index.html) as design inspiration (in particular, font and [text width](http://paulgraham.com/gfaq.html))
