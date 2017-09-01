@@ -1,5 +1,5 @@
 # rhezab.github.io
-Rheza Budiono's blog. It still sucks on mobile.
+Rheza Budiono's blog. 
 
 [Jekyll](https://jekyllrb.com/) is cool because it lets web noobs like me have fast, neat-looking blogs with as little effort as possible. It's so much easier and faster than what I remember of WordPress. If you want to have a neat-looking blog of your own, here's how I did it:
 
