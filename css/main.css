@@ -201,8 +201,8 @@ a:visited { color: #205caa; }
 
 .post-content { 
     margin: 0 0 30px;
-    /* font-family: Helvetica, Arial, sans-serif;
-    font-size: small; */
+    font-family: Verdana, Arial, sans-serif;
+    font-size: small;
     color: #333;
     /* color: #586e75; //lighter gray */
     /* color: #586e75; //darker gray */
