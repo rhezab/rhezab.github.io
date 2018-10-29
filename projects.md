@@ -16,4 +16,4 @@ Basically style transfer without the content loss.
 ### VAE Experiments
 **[[Code]](https://github.com/rhezab/vae_experiments)**
 <br/>
-Interpolating in the latent space of fashion(mnist)
+Interpolating in the latent space of fashion(mnist).
