@@ -12,3 +12,8 @@ Visually exploring grammar vectors in word embedding space.
 **[[Results]](https://www.notion.so/rheza/Extracting-style-from-art-dca024be0ab44e6d9648040a19f9e040)** **[[Colab notebook]](https://colab.research.google.com/drive/1PWmdTCxN8nyGM50KyiPSmWlJjvI5qBkN)**
 <br/>
 Basically style transfer without the content loss.
+
+### VAE Experiments
+**[[Code]](https://github.com/rhezab/vae_experiments)**
+<br/>
+Interpolating in the latent space of fashion(mnist)
