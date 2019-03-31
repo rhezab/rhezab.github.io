@@ -21,4 +21,4 @@ Interpolating in the latent space of fashion(mnist).
 ### Reaction-Diffusion Animations
 **[[Sims' tutorial]](http://www.karlsims.com/rd.html)** **[[Colab notebook]](https://colab.research.google.com/drive/18mSHO3aUc8Ng_FypdSYIpMhtBYDCkxc6)**
 <br />
-I followed Sims' tutorial to make some fun, simple reaction-diffusion animations.
+Colab notebook to accompany Karl Sims' excellent tutorial
