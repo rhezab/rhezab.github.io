@@ -14,7 +14,7 @@ Visually exploring grammar vectors in word embedding space.
 ### Extracting style from art
 **[[Results]](https://www.notion.so/rheza/Extracting-style-from-art-dca024be0ab44e6d9648040a19f9e040)** **[[Colab notebook]](https://colab.research.google.com/drive/1PWmdTCxN8nyGM50KyiPSmWlJjvI5qBkN)**
 <br/>
-**[[Applied in MetaNAR as a tool "for abstracting the shapes and functions of a city" (thanks to John Hadaway)]](https://www.metanar.com/)
+**[[Applied in MetaNAR as a tool "for abstracting the shapes and functions of a city" (thanks to John Hadaway)]](https://www.metanar.com/)**
 <br/>
 Basically style transfer without the content loss.
 
