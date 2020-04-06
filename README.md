@@ -10,3 +10,4 @@ Rheza Budiono's blog.
 
 ### Weird notes:
 - use bundle exec jekyll build & bundle exec jekyll serve
+- Do relative links work? See [[about]](./about)
