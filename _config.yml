@@ -18,6 +18,7 @@ kramdown:
 # plugins
 plugins:
   - jekyll-relative-links
+  - jekyll-titles-from-headings
 
 # collections
 collections:
