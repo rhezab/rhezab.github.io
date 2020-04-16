@@ -1,8 +1,8 @@
 ---
 layout: note
 permalink: /Markov_chain
+title: Markov chain
 ---
-# Markov chain
 
 - Is an instance of a [[Stochastic process]](./Stochastic_process.md)
 - A **finite** Markov chain has a finite state space $$S=\{0,1,...,N\}$$.
