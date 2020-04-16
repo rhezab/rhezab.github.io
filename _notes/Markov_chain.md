@@ -1,5 +1,6 @@
 ---
 layout: note
+permalink: /Markov_chain
 ---
 
 # Markov chain
@@ -12,13 +13,13 @@ layout: note
 
 For the rest of these notes, we'll assue that our Markov chians are finite and time-homogenous. And now, for some notation:
 
-- Let $$\phi_t$$ be the probability vector at time $$t$$, and $$\phi_t(i)=\Pr(x_t=i)$$ 
+- Let $$\phi_t$$ be the probability vector at time $$t$$, and $$\phi_t(i)=\Pr(x_t=i)$$
 
 - Let $$p(i,j)=\Pr(x_1=j|x_0=i)$$, and $$p_n(i,j)=\Pr(x_n=j|x_0=i)$$
 
 - Let $$P=[p(i,j)]$$ be the transition matrix
 
-  
+
 
 Then some basic facts:
 
@@ -31,9 +32,4 @@ Examples:
 
 - Random walk on line
 - Random walk on graph
-  - $$p(x,y)=\frac{1}{\deg(x)}$$ 
-
-
-
-
-
+  - $$p(x,y)=\frac{1}{\deg(x)}$$
