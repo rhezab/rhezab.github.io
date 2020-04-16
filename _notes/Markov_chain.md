@@ -14,8 +14,10 @@ $$
 $$
 \Pr (x_n=i_n|x_0=i_0, ..., x_{n-1}=i_{n-1})=\Pr (x_n=i_n|x_{n-1}=i_{n-1})
 $$
+
 - The **time-homogenous** assumption says that $$\Pr(x_n=j|x_{n-1}=i) = \Pr(x_1=j|x_0=i)$$
 
+The **time-homogenous** assumption says that $$\Pr(x_n=j|x_{n-1}=i) = \Pr(x_1=j|x_0=i)$$
 For the rest of these notes, we'll assue that our Markov chians are finite and time-homogenous. And now, for some notation:
 
 - Let $$\phi_t$$ be the probability vector at time $$t$$, and $$\phi_t(i)=\Pr(x_t=i)$$
