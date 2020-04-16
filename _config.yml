@@ -18,3 +18,8 @@ kramdown:
 # plugins
 plugins:
   - jekyll-relative-links
+
+# collections
+collections:
+  notes:
+    output: true
