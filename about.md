@@ -4,7 +4,4 @@ title: About
 permalink: /about/
 ---
 
-Hi :)
-
-E-mail me at rheza@uchicago.edu if you want to talk.
-
+There are my working notes, inspired by [Andy's working notes](https://notes.andymatuschak.org/About_these_notes).
