@@ -1,6 +1,6 @@
 ---
 layout: note
-permalink: Markov_chain
+permalink: /Markov_chain
 ---
 
 # Markov chain
