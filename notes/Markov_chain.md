@@ -7,7 +7,8 @@ permalink: /Markov_chain
 
 - Is an instance of a [[Stochastic process]](./Stochastic_process.md)
 - A **finite** Markov chain has a finite state space $$S=\{0,1,...,N\}$$.
-- A **chain** is a realised sequence in a stochastic process, with probability given by $$P(x_0=i_0, x_1=i_1, ..., x_n=i_n)$$. By the [chain rule of probability](https://en.wikipedia.org/wiki/Chain_rule_(probability)), we condition the present on the past and get:  $$P(x_0=i_0, x_1=i_1, ..., x_n=i_n) = P(x_0=i_0)\cdot P(x_1=i_1|x_0=i_0)\cdot ... P(x_n=i_n|x_0=i+0, x_1=i_1, ...)$$
+- A **chain** is a realised sequence in a stochastic process, with probability given by $$P(x_0=i_0, x_1=i_1, ..., x_n=i_n)$$. By the [chain rule of probability](https://en.wikipedia.org/wiki/Chain_rule_(probability)), we condition the present on the past and get:
+$$P(x_0=i_0, x_1=i_1, ..., x_n=i_n) = P(x_0=i_0)\cdot P(x_1=i_1|x_0=i_0)\cdot ... P(x_n=i_n|x_0=i+0, x_1=i_1, ...)$$
 - A chain is **Markov** if we make the assumption that the conditional probability of the next state depends only on the present state (and not how we goo the present state), i.e. $$\Pr (x_n=i_n|x_0=i_0, ..., x_{n-1}=i_{n-1})=\Pr (x_n=i_n|x_{n-1}=i_{n-1})$$.
 - The **time-homogenous** assumption says that $$\Pr(x_n=j|x_{n-1}=i) = \Pr(x_1=j|x_0=i)$$
 
