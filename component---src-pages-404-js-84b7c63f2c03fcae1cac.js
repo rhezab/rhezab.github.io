@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[3],{OMi8:function(e,n,t){},w2l6:function(e,n,t){"use strict";t.r(n);var a=t("q1tI"),c=t.n(a);t("OMi8");n.default=function(){return c.a.createElement("div",{className:"container max-w-2xl px-4 mx-auto text-gray-900 flex flex-col min-h-screen"},c.a.createElement("p",{className:"my-4"},"Nothing here..."))}}}]);
-//# sourceMappingURL=component---src-pages-404-js-84b7c63f2c03fcae1cac.js.map
