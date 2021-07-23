@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:site_name" content="Rheza Budiono">
+
+  <title>Successor features and generalised policy improvement</title>
+  <meta name="description" content="   ⊕For this week’s personal Learning Day (I don’t work at OpenAI), I decided to explore the use of Orbit – a platform that allows you to intersperse Anki-st...">
+
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/assets/img/albers.jpg"/>
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+
+  <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+ <!--   <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="/weblog/sfs-gpi">
+
+  <link rel="alternate" type="application/rss+xml" title="Rheza Budiono" href="/feed.xml" />
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group">
+	<a href="/"><img class="badge" src="/assets/img/albers.jpg" alt="CH"></a>
+
+	<!--
+	
+	
+			
+				<a href="/credits">Credits</a>
+			
+		
+	
+	
+			
+				<a href="/essays">Essays</a>
+			
+		
+	
+	
+			
+				<a href="/weblog">Weblog</a>
+			
+		
+	
+	-->
+
+	</nav>
+</header>
+
+    <article class="group">
+      <h1>Successor features and generalised policy improvement</h1>
+
+<p class="subtitle">July 22, 2021</p>
+
+<head>
+  <script type="module" src="https://js.withorbit.com/orbit-web-component.js"></script>
+</head>
+
+<p><label for="sn-intro" class="margin-toggle"> ⊕</label><input type="checkbox" id="sn-intro" class="margin-toggle" /><span class="marginnote">For this week’s personal <a href="https://openai.com/blog/learning-day/">Learning Day</a> (I don’t work at OpenAI), I decided to explore the use of <a href="https://withorbit.com/">Orbit</a> – a platform that allows you to intersperse Anki-style spaced repitition prompts in prose. Read <a href="https://quantum.country/">Quantum Country</a> to see it in action. </span></p>
+
+<p>Together, successor features and generalised policy improvement <a href="https://arxiv.org/pdf/1606.05312.pdf">(Barreto 2016)</a> form a powerful framework for transfer in reinforcement learning. In particular, they facilitate transfer between tasks that have different reward functions but otherwise identical environments. Formally, define an MDP as a tuple \(M = (S,A,p,r,\gamma)\) where:</p>
+
+<ul>
+  <li>\(S\) is the state space</li>
+  <li>\(A\) is the action space</li>
+  <li>\(p(s' \| s,a)\) defines the environment dynamics</li>
+  <li>\(r(s,a,s')\) is the reward function giving the reward at the transition \(s \xrightarrow{a} s'\). For simplicity, we’ll consider the reward function to be deterministic – but you can also think of this as giving the expectation of a stochastic reward function.</li>
+  <li>\(\gamma\) is the discount rate</li>
+</ul>
+
+<p>Then successor features and generalised policy improvement (SFs &amp; GPI) facilitates transfer between tasks where everything else is the same except for \(R(s,a,s')\).</p>
+
+<p><br /></p>
+
+<orbit-reviewarea color="blue" style="width:70%">
+
+​	<orbit-prompt question="What is the tuple that defines a Markov Decision Process (MDP)?" answer="$M=(S,A,p,r,\gamma)$ where $S$ is the state space, $A$ is the action space, $p$ is the dynamics, $r$ is the reward function, and $\gamma$ is the discount rate."></orbit-prompt>
+
+​	<orbit-prompt question="SFs &amp; GPI facilitates transfer between two MDPs that are identical except in which component of the tuple?" answer="The reward function $R(s,a,s')$."></orbit-prompt>
+
+</orbit-reviewarea>
+
+<h2 id="successor-features">Successor features</h2>
+
+<p>To understand how SFs &amp; GPI facilitates such transfer, let’s first discuss what <em>successor features</em> are. Suppose that we have features \(\phi(s,a,s')\) such that there exists some \(w\) such that \(r(s,a,s') = w \cdot \phi(s,a,s')\). That is, the reward function is a linear function of our features \(\phi\). For a discrete state space, one such feature is a one-hot vector indexing the current state \(s_i\) (see <em>successor representations</em>). Then \(w_i\) is simply the reward received by reaching state \(s_i\).</p>
+
+<p>Since the reward function is a linear function of our features \(\phi\), we can factor out \(w\) when computing extended returns.</p>
+
+\[\begin{align*}
+R_t &amp;= \sum_{k=0}^{N} \gamma ^k r_{t+k} \\
+&amp;= \sum_{k=0}^{N} \gamma ^k (w\cdot \phi_{t+k}) \\
+&amp;= w \cdot \Big( \sum_{k=0}^{N} \gamma ^k  \phi_{t+k} \Big)
+\end{align*}\]
+
+<p>In particular, this means that you can write:</p>
+
+\[\begin{align*}
+Q^{\pi}(s,a) &amp;= E^{\pi} [R _{t+1}|s_t = s, a_t=a ] \\
+&amp;= E^{\pi} \Big[ w \cdot \Big( \sum_{k=0}^{N} \gamma ^k  \phi_{t+k} \Big)|s_t = s, a_t=a \Big] \\
+&amp;= w \cdot E^{\pi} \Big[\Big( \sum_{k=0}^{N} \gamma ^k  \phi_{t+k} \Big)|s_t = s, a_t=a \Big] \\
+&amp;= w \cdot \psi^{\pi}(s,a)
+\end{align*}\]
+
+<p>where \(\psi^{\pi}(s,a)\) is what we refer to as a <em>successor feature</em>. This is powerful because it separates reward prediction from future state prediction.<label for="sn-fsp" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-fsp" class="margin-toggle" /><span class="sidenote">Note that you can use any value function estimation algorithm to estimate \(\psi\) just like you’d normally estimate \(Q(s,a)\) directly. </span> If a new task has a reward function that is linear in \(\phi\), and you can estimate its \(w\), then you can instantly compute \(Q^{\pi}(s,a)\) for the new task – you just need to swap out the old \(w\) for the new \(w'\).</p>
+
+<p>To make this concrete, let’s consider a navigation task in a grid world. Suppose that \(\pi\) is a random walk policy. Then, taking \(\phi(s)\) to be one-hot as desribed above, \((\psi(s))_i\) would basically encode the distance \(d(s,s_i)\) between the two squares \(s\) and \(s_i\). Suppose there’s a single goal location such that \(w\) is one-hot. If there’s a new goal location, you simply need to change \(w\) accordingly and recompute \(Q^{\pi}(s,a)\) – you can <em>transfer</em> your “map” \(\psi\) between the two tasks.</p>
+
+<p><br /></p>
+
+<orbit-reviewarea color="blue" style="width:70%">
+
+​	<orbit-prompt question="SFs break down estimating the action-value $Q(s,a)$ into a dot product between two vectors. What are the two vectors?" answer="The reward weights $w$ and the SF $\psi(s,a)$."></orbit-prompt>
+
+​	<orbit-prompt question="Breaking down Q-function estimation in this way decouples ___ prediction from ___ prediction" answer="reward; future state"></orbit-prompt>
+
+​	<orbit-prompt question="Precisely, we have that $Q(s,a)=w\cdot \psi(s,a)$. Single-step reward $r$ is a function of our single-step features $\phi$, i.e. $r(s,a,s')=f(\phi(s,a,s'))$. What assumption on $f$ allows us to write the Q-function in that way?" answer="$f$ is linear. That is, $r=w\cdot\phi$."></orbit-prompt>
+
+​	<orbit-prompt question="How does the linearity assumption allow us to rewrite the return for a single trajectory so that we can decouple reward prediction from future state prediction? That is, $R_t =\sum_{k=0}^{N} r_{t+k} = \sum_{k=0}^{N} w \cdot \gamma^{k} \phi_{t+k} = ?$" answer="It allows us to factor $w$ out of the sum. That is, continuing the question in the question: $$= w \cdot \Big( \sum_{k=0}^{N} \gamma^k \phi_{t+k} \Big) = w \cdot \psi_t$$"></orbit-prompt>
+
+​	<orbit-prompt question="Is the SF $\psi(s,a)$ policy dependent?" answer="Yes."></orbit-prompt>
+
+</orbit-reviewarea>
+
+<h2 id="generalised-policy-improvement">Generalised policy improvement</h2>
+
+<p>Successor features allow you to instantly recompute \(Q^{\pi}(s,a)\) for a new task given that you know the new \(w\). But on its own, SFs don’t allow you to transfer behavior. That’s where generalised policy improvement (GPI) comes in. In essence, GPI says that you act greedily over the set of \(Q^{\pi}(s,a)\) for any previous policies \(\pi\). Precisely, GPI says that you act according to:</p>
+
+\[\pi(s)= \text{argmax}_a \text{max}_i Q^{\pi_i}(s,a)\]
+
+<p>This guarantees that you do no worse than any of your previous policies (which may have been learned on different tasks). GPI is the part that allows you to transfer useful behavior between tasks. Putting SFs &amp; GPI together: given \(w\), SFs allow you to instantly recompute \(Q^{\pi}(s,a)\) for any policy \(\pi\) and then use GPI to transfer useful behavior to your new task.</p>
+
+<p><br /></p>
+
+<orbit-reviewarea color="blue" style="width:70%">
+
+​	<orbit-prompt question="Given $w$, SFs allow you to instantly recompute $Q^{\pi}(s,a)$. What does GPI allow you to do?" answer="Transfer useful behavior from an old policy $\pi$ to your new task."></orbit-prompt>
+
+​	<orbit-prompt question="Complete the following equation describing GPI... $$\pi(s)= \text{argmax}_a \text{max}_i \text{(BLANK)}$$" answer="$\pi(s)= \text{argmax}_a \text{max}_i Q^{\pi_i}(s,a)$"></orbit-prompt>
+
+​	<orbit-prompt question="What does GPI guarantee?" answer="That you'll do no worse than any of your policies."></orbit-prompt>
+
+</orbit-reviewarea>
+
+
+    </article>
+    <span class="print-footer">Successor features and generalised policy improvement - July 22, 2021 - Rheza Budiono</span>
+    <footer>
+  <br/>
+  <br/>
+  <hr class="slender">
+  <br/>
+</footer>
+
+  </body>
+</html>
