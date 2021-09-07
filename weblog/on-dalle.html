@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:site_name" content="Rheza Budiono">
+
+  <title>On Dall-E</title>
+  <meta name="description" content="I used to be an Open AI hater. All they do is scale, I said to people. Of course, this was a dumb thing to say in the first place — in a sense, a human brain...">
+
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/assets/img/albers.jpg"/>
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+
+  <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+ <!--   <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="http://localhost:4000/weblog/on-dalle">
+
+  <link rel="alternate" type="application/rss+xml" title="Rheza Budiono" href="http://localhost:4000/feed.xml" />
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group">
+	<a href="/"><img class="badge" src="/assets/img/albers.jpg" alt="CH"></a>
+
+	<!--
+	
+	
+			
+				<a href="/credits">Credits</a>
+			
+		
+	
+	
+			
+				<a href="/essays">Essays</a>
+			
+		
+	
+	
+			
+				<a href="/weblog">Weblog</a>
+			
+		
+	
+	-->
+
+	</nav>
+</header>
+
+    <article class="group">
+      <h1>On Dall-E</h1>
+
+<p class="subtitle">September 7, 2021</p>
+
+<p>I used to be an Open AI hater. All they do is <em>scale</em>, I said to people. Of course, this was a dumb thing to say in the first place — in a sense, a human brain is just a scaled-up monkey brain. But my thinking was that just scaling up wouldn’t solve the drawbacks of current AI systems — amongst them, the lack of common-sense concepts and generalization.</p>
+
+<p>The self-driving system presented at Tesla AI Day was a demonstration of this in some sense. Instead of the system being able to recognize the concept of humans, and avoid them at all costs, they had to program a simulation to be able to generate infinite amounts of data in all manners of edge cases such as a family jogging in the middle of the highway (the simulation was super impressive/eerie/ingenious by the way).</p>
+
+<p>But Dall-E is the most impressive demonstration of concept learning and generalization I’ve yet to see in AI. It can draw ridiculous things like a daikon wearing a tutu walking a dog. If that’s not generalization I don’t know what is. And in a sense, it is just a big language model trained to model the joint distribution of images and captions. The key innovation was using a VQ-VAE to create a discrete language to describe images — thus reducing the problem to a language modelling problem, which you can of course apply a big Transformer to.</p>
+
+<p>It turns out that the secret to concept learning may not be a fancy new architecture with some super clever structure or a new loss function or symbolic systems — it may be in using existing architectures trained with lots of data on a clever task (such as learning the joint distribution of x and language). After all, language is how we think conceptually. So if a system can go between other modalities and language, they’re going between other modalities and concepts. Dall-E has demonstrated to me that if you want certain properties in a deep learning system, there is a huge amount of power in just setting up the problem the right way.</p>
+
+<p>The right problem, with lots of data to learn from, can give us amazing results – as Open AI has shown again and again. Of course, we also need an architecture that can scale appropriately with the data. The key architectural innovation with Transformers, which David McAllester talked about in his class and Ilya talked about in his podcast with Pieter Abeel, was to disentangle sequence length from steps of computation. With any RNN, the number of steps of computation is equal to the length of the sequence. This makes learning long-term dependences hard — problems with gradient stability, and the problem of squeezing an entire history into a single vector.</p>
+
+<p>There’s a story about Ilya Sutskever that David McAllester told in his deep learning class at TTIC. Ilya was speaking at conference, around the time that AlexNet emerged. He preached, (presumably metaphoric) hand thumping on a Bible, that neural nets are expressive, neurel nets are trainable, neural nets will work (well, if you set the problem up correctly and have enough data). At this point, he’s preaching to the choir.</p>
+
+<p>Anyways, that’s all my thoughts for now. I know this post is somewhat disorganized and unpolished, but I’m making a commitment to trying to post more half-baked thoughts – to get them out of the way and onto “paper,” for further reflection.</p>
+
+<p><strong>Further reading:</strong></p>
+
+<ul>
+  <li>Felix Hill on <a href="https://fh295.github.io/noncompositional.html">Why composition is Dall-E’s strength, not its weakness.</a></li>
+  <li>DeepMind’s Open-Ended Learning Team, <a href="https://storage.googleapis.com/deepmind-media/papers/Open-Ended%20Learning%20Leads%20to%20Generally%20Capable%20Agents/open-ended-learning-paper.pdf">Open-Ended Learning Leads to Generally Capable Agents</a> – another example of getting generalization by setting up the right problem at scale.</li>
+</ul>
+
+
+
+    </article>
+    <span class="print-footer">On Dall-E - September 7, 2021 - Rheza Budiono</span>
+    <footer>
+  <br/>
+  <br/>
+  <hr class="slender">
+  <br/>
+</footer>
+
+  </body>
+</html>
