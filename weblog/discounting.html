@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:site_name" content="Rheza Budiono">
+
+  <title>Is temporal discounting all you need?</title>
+  <meta name="description" content="Half baked thoughts on efficient credit assignment, the (un)surprising effectiveness of temporal discounting and the advantage function, and how we might imp...">
+
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/assets/img/albers.jpg"/>
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+
+  <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+ <!--   <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="/weblog/discounting">
+
+  <link rel="alternate" type="application/rss+xml" title="Rheza Budiono" href="/feed.xml" />
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group">
+	<a href="/"><img class="badge" src="/assets/img/albers.jpg" alt="CH"></a>
+
+	<!--
+	
+	
+			
+				<a href="/credits">Credits</a>
+			
+		
+	
+	
+			
+				<a href="/essays">Essays</a>
+			
+		
+	
+	
+			
+				<a href="/weblog">Raw Thought</a>
+			
+		
+	
+	-->
+
+	</nav>
+</header>
+
+    <article class="group">
+      <h1>Is temporal discounting all you need?</h1>
+
+<p class="subtitle">April 3, 2022</p>
+
+<p>Half baked thoughts on efficient credit assignment, the (un)surprising effectiveness of temporal discounting and the advantage function, and how we might improve in the low data limit with explanations and inverse planning….</p>
+
+<p><br /></p>
+
+<p>Consider the episodic reinforcement learning setting, where you want to maximize undiscounted return from a finite episode \(R_t = \sum_{t=0}^{T} r_t\). Since returns are stochastic, we want to maximize its expectation, which we can do with a policy gradient:</p>
+
+\[\begin{aligned}
+\nabla_{\theta} V_{0} &amp;=\nabla_{\theta} \mathbb{E}_{\pi}\left[\sum_{t=0}^{T} r_{t}\right] \\
+&amp;=\mathbb{E}_{\pi}\left[\sum_{t=0}^{T} \nabla_{\theta} \log \pi\left(\mathbf{a}_{t} \mid \mathbf{h}_{t} ; \theta\right) \mathcal{R}_{t}\right]
+\end{aligned}\]
+
+<p>Here \(R_t\) acts as the credit assigned to action \(a_t\) given state \(h_t\). This return may include causally irrelevant rewards which corrupt the credit assignment signal, creating unwanted variance.  We can understand this intuitively with an example. Suppose that your goal is to have a maximally rewarding week. You always have a quiz on Friday, and your success on that quiz depends on how much you study for the quiz. So the causally relevant reward for the action “study” is your score on Friday’s quiz. But if we were to sum your all subsequent rewards for the week, we’d include irrelevant rewards like how much you enjoyed dinner on Thursday. These irrelevant rewards corrupt your learning signal for the action “study”, potentially hindering your ability to learn that you really should study for Friday’s quiz.</p>
+
+<p>To learn more efficiently, we want to include only rewards <em>caused</em> by those actions. So how do we figure out which rewards are caused by which actions?</p>
+
+<p>The “model-free” way to do it uses two methods to cancel out irrelevant rewards. First, temporal discounting uses temporal proximity as a proxy for causal relevance. This assumption rings true for reactionary games like Space Invaders. So even when temporal discounting is not inherent to your RL environment, you may want to use a temporally discounted return \(R_t = \sum_{t=0}^{T} \gamma^t r_t\). Secondly, the advantage function \(Q(s,a)-V(s)\) uses the baseline value \(V(s)\) as a counterfactual of sorts - what is the marginal benefit of choosing action \(a\) in response to state \(s\)? Here we use this marginal benefit as a proxy for causal relevance (the idea of a marginal benefit is related to the idea of a counterfactual).</p>
+
+<p>Using these two methods are super effective, especially when aided with a planning component (see: many successes of deep RL).  But they do seem to fail under two conditions:</p>
+
+<ul>
+  <li>Long-term credit assignment is required (since \(\gamma^t \rightarrow 0\))</li>
+  <li>There are distractor (i.e. causally irrelevant) rewards in between action and reward</li>
+</ul>
+
+<p>The first failure mode may be survivable, but the two failure modes combined seems to be a death trap. This is precisely the failure mode addressed by these two papers, which proposes the use of episodic memory as a “portal” for temprally distant but causally important rewards:<label for="ca-attn" class="margin-toggle sidenote-number"></label><input type="checkbox" id="ca-attn" class="margin-toggle" /><span class="sidenote">Can we use Transformer attention for credit assignment? Suppose that you have a Transformer which predicts \((s,a,r)\) sequences. Then you can use soft attention to assign credit for reward to relevant \((s,a)\) tuples. </span></p>
+
+<ul>
+  <li><a href="https://www.nature.com/articles/s41467-019-13073-w">Optimizing agent behavior over long time scales by transporting value</a></li>
+  <li><a href="https://arxiv.org/pdf/2102.12425.pdf">Synthetic Returns for Long-Term Credit Assignment</a></li>
+</ul>
+
+<p>So “model-free” credit assignment is pretty good. Can we do better? Maybe by directly trying to explain events in terms of object interactions? Certainly, the ability of humans to explain events seems related to our ability to learn from them. Imagine that you’ve recently adopted a puppy. You come home one day and find your favorite running shoes in tatters. You sigh, buy your puppy a chew toy, and it never happens again. This kind of inference is taken for granted when done by humans, but it’s actually amazing. Imagine what would happen if you trained a naive model-free RL agent to solve the same scenario. It would probably try vacuuming your carpets and a million silly things before even considering your puppy.</p>
+
+<p>Of course, this is an unfair comparison. You did not come home that day totally naive. Instead, you arrived with a rich causal model of the world (e.g. puppies like to bite things, and biting things damages them). Our comparative advantage is our ability to learn <em>general</em> causal models of the world (e.g. puppies bite things), use them as priors to infer <em>actual</em> causal models for novel situations (e.g. my puppy bit my shoe), and use this model to rapidly learn (e.g. I should buy a chew toy). In a way, this ability is like a form of inverse planning…</p>
+
+
+
+    </article>
+    <span class="print-footer">Is temporal discounting all you need? - April 3, 2022 - Rheza Budiono</span>
+    <footer>
+  <br/>
+  <br/>
+  <hr class="slender">
+  <br/>
+</footer>
+
+  </body>
+</html>
