@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Having a Coke with You - Poem with Image Tooltips</title>
+    <link rel="stylesheet" href="tufte.css">
+    <style>
+        .container {
+            display: flex;
+            gap: 20px;
+            min-height: 100vh; /* Ensure the container takes at least the full viewport height */
+        }
+        .poem {
+            width: 55%;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            font-size: 18px;
+            padding-bottom: 50vh; /* Add padding at the bottom of the poem */
+        }
+        .tooltip-container {
+            flex: 0.9;
+            position: relative;
+            height: 100vh;
+            overflow-y: auto;
+            width: 40%; /* Adjust as needed */
+        }
+        .tooltip {
+            border-bottom: 1px dotted #666;
+            cursor: pointer;
+        }
+        .tooltiptext {
+            display: none;
+            position: fixed;
+            left: 60%; /* Set a fixed left position for all tooltips */
+            background-color: #fffff8;
+            padding: 10px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            max-width: calc(40% - 40px);
+            box-sizing: border-box;
+            max-height: 90vh;
+            overflow: hidden;
+        }
+        .tooltiptext img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            width: auto;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .tooltiptext.active {
+            display: block;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            display: block;
+        }
+        @media (prefers-color-scheme: dark) {
+            .tooltiptext {
+                background-color: #151515;
+            }
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <h1>HAVING A COKE WITH YOU</h1>
+        <div class="container">
+            <div class="poem">
+is even more fun than going to <span class="tooltip" data-tooltip="san-sebastian">San Sebastian</span>, <span class="tooltip" data-tooltip="irun">Irún</span>, <span class="tooltip" data-tooltip="hendaye">Hendaye</span>, <span class="tooltip" data-tooltip="biarritz">Biarritz</span>, <span class="tooltip" data-tooltip="bayonne">Bayonne</span>
+or being sick to my stomach on the Travesera de <span class="tooltip" data-tooltip="gracia">Gracia</span> in Barcelona
+partly because in your orange shirt <span class="tooltip" data-tooltip="vincent-warren">you</span> look like a better happier <span class="tooltip" data-tooltip="st-sebastian">St. Sebastian</span>
+partly because of my love for you, partly because of your love for yoghurt
+partly because of the fluorescent orange tulips around the birches
+partly because of the secrecy our smiles take on before people and statuary
+it is hard to believe when I'm with you that there can be anything as still
+as solemn as unpleasantly definitive as statuary when right in front of it
+in the warm New York 4 o'clock light we are drifting back and forth
+between each other like a tree breathing through its spectacles
+
+and the portrait show seems to have no faces in it at all, just paint
+you suddenly wonder why in the world anyone ever did them
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; I look
+at you and I would rather look at you than all the portraits in the world
+except possibly for the <span class="tooltip" data-tooltip="polish-rider">Polish Rider</span> occasionally and anyway it's in <span class="tooltip" data-tooltip="the-frick">the Frick</span>
+which thank heavens you haven't gone to yet so we can go together the first time
+and the fact that you move so beautifully more or less takes care of <span class="tooltip" data-tooltip="futurism">Futurism</span>
+just as at home I never think of the <span class="tooltip" data-tooltip="nude-descending">Nude Descending a Staircase</span> or
+at a rehearsal a single drawing of <span class="tooltip" data-tooltip="leonardo">Leonardo</span> or <span class="tooltip" data-tooltip="michelangelo">Michelangelo</span> that used to wow me
+and what good does all the research of the Impressionists do them
+when they never got the right person to stand near the tree when the <span class="tooltip" data-tooltip="sun-sank">sun sank</span>
+or for that matter Marino Marini when he didn't pick the rider as carefully
+as <span class="tooltip" data-tooltip="marino-marini">the horse</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it seems they were all cheated of some marvelous experience
+which is not going to go wasted on me which is why I'm telling you about it
+
+
+<em>A poem by Frank O'Hara</em>
+<a href="image-credits.html"><em>Image Credits</em></a>
+
+        </div>
+        <div class="tooltip-container">
+            <div id="san-sebastian" class="tooltiptext">
+                <img src="imgs/san-sebas.jpg">
+            </div>
+            <div id="irun" class="tooltiptext">
+                <img src="imgs/irun.png">
+            </div>
+            <div id="vincent-warren" class="tooltiptext">
+                <img src="imgs/vincent-warren.jpg">
+            </div>
+            <div id="st-sebastian" class="tooltiptext">
+                <img src="imgs/san-sebastian-person.jpg">
+            </div>
+            <div id="polish-rider" class="tooltiptext">
+                <img src="imgs/polish-rider.jpg">
+            </div>
+            <div id="the-frick" class="tooltiptext">
+                <img src="imgs/the-frick.webp">
+            </div>
+            <div id="nude-descending" class="tooltiptext">
+                <img src="imgs/nude-descending.jpg">
+            </div>
+            <div id="marino-marini" class="tooltiptext">
+                <img src="imgs/marino-marini.jpg">
+            </div>
+            <div id="hendaye" class="tooltiptext">
+                <img src="imgs/hendaye.png">
+            </div>
+            <div id="biarritz" class="tooltiptext">
+                <img src="imgs/biarritz.jpg">
+            </div>
+            <div id="bayonne" class="tooltiptext">
+                <img src="imgs/bayonne.jpg">
+            </div>
+            <div id="gracia" class="tooltiptext">
+                <img src="imgs/casa-battlo.gif">
+            </div>
+            <div id="orange-tulips" class="tooltiptext">
+                <img src="imgs/orange-poppy.png">
+            </div>
+            <div id="futurism" class="tooltiptext">
+                <img src="imgs/stella-bk.jpg">
+            </div>
+            <div id="leonardo" class="tooltiptext">
+                <img src="imgs/leonardo-drapery.jpg">
+            </div>
+            <div id="sun-sank" class="tooltiptext">
+                <img src="imgs/grainstacks-1890.jpg">
+            </div>
+            <div id="michelangelo" class="tooltiptext">
+                <img src="imgs/libyan-sibyl.jpg">
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script>
+    function centerTooltip(tooltipElement) {
+        const viewportHeight = window.innerHeight;
+        const maxHeight = viewportHeight * 0.9;
+        tooltipElement.style.maxHeight = `${maxHeight}px`;
+        
+        // Ensure the image fits within the tooltip
+        const img = tooltipElement.querySelector('img');
+        if (img) {
+            img.style.maxHeight = `${maxHeight - 20}px`; // Subtract padding
+            
+            // Set the tooltip width based on the image width
+            const imgWidth = img.offsetWidth;
+            const tooltipWidth = imgWidth + 20; // Add padding
+            tooltipElement.style.width = `${tooltipWidth}px`;
+            
+            // Adjust the right position to maintain the same starting point
+            const maxWidth = parseInt(getComputedStyle(tooltipElement).maxWidth);
+            const rightAdjustment = Math.max(0, maxWidth - tooltipWidth);
+            tooltipElement.style.right = `${20 + rightAdjustment}px`;
+        }
+
+        const tooltipHeight = tooltipElement.offsetHeight;
+        const centerY = (viewportHeight - tooltipHeight) / 2;
+        tooltipElement.style.top = `${centerY}px`;
+    }
+
+    document.querySelectorAll('.tooltip').forEach(tooltip => {
+        tooltip.addEventListener('mouseenter', (event) => {
+            const tooltipId = tooltip.getAttribute('data-tooltip');
+            const tooltipElement = document.getElementById(tooltipId);
+            
+            document.querySelectorAll('.tooltiptext').forEach(tt => tt.classList.remove('active'));
+            tooltipElement.classList.add('active');
+
+            centerTooltip(tooltipElement);
+        });
+
+        // Add mouseleave event listener to each tooltip
+        tooltip.addEventListener('mouseleave', () => {
+            const tooltipId = tooltip.getAttribute('data-tooltip');
+            const tooltipElement = document.getElementById(tooltipId);
+            tooltipElement.classList.remove('active');
+        });
+    });
+
+    // Recenter tooltip on window resize
+    window.addEventListener('resize', () => {
+        const activeTooltip = document.querySelector('.tooltiptext.active');
+        if (activeTooltip) {
+            centerTooltip(activeTooltip);
+        }
+    });
+    </script>
+</body>
+</html>
