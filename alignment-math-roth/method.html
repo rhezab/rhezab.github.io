@@ -1,0 +1,88 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><script>try{const t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}
+function toggleTheme(){const d=document.documentElement,dark=d.dataset.theme?d.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;d.dataset.theme=dark?'light':'dark';try{localStorage.setItem('theme',d.dataset.theme)}catch(e){}}</script><meta name="viewport" content="width=device-width,initial-scale=1"><title>Transcription method</title><style>
+:root{--bg:#fff;--fg:#1a1a1a;--muted:#777;--line:#e6e6e6;--accent:#1f5fbf;--strip:68px;--thumb-bg:#f3f3f3}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#141414;--fg:#e8e8e8;--muted:#9a9a9a;--line:#2c2c2c;--accent:#7fb0ff;--thumb-bg:#222}}
+:root[data-theme=dark]{--bg:#141414;--fg:#e8e8e8;--muted:#9a9a9a;--line:#2c2c2c;--accent:#7fb0ff;--thumb-bg:#222}
+button.theme{all:unset;cursor:pointer;color:var(--muted);font-size:18px;line-height:1;padding:4px 8px}button.theme:hover{color:var(--fg)}
+.ytbox{position:relative;width:100%;min-width:200px;aspect-ratio:16/9}.ytbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:4px}
+.corner{position:fixed;top:10px;right:14px;z-index:12}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+#strip{position:fixed;top:0;left:0;right:0;height:var(--strip);display:flex;gap:2px;padding:4px 6px 6px;background:var(--bg);border-bottom:1px solid var(--line);z-index:10}
+#strip a.home{flex:0 0 auto;display:flex;align-items:center;justify-content:center;width:40px;font-size:22px;color:var(--muted);border-right:1px solid var(--line);margin-right:4px}#strip a.home:hover{color:var(--fg);text-decoration:none}
+#strip .themebox{flex:0 0 auto;display:flex;align-items:center;border-left:1px solid var(--line);margin-left:4px}
+#strip a.th{flex:1 1 0;min-width:10px;height:100%;position:relative;display:block;overflow:hidden;border-radius:3px;background:var(--thumb-bg);opacity:.72;transition:opacity .12s}
+#strip a.th img{width:100%;height:100%;object-fit:cover;object-position:left top;display:block}
+#strip a.th:hover,#strip a.th.cur{opacity:1}
+#strip a.th.cur::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--accent)}
+#strip a.th.playing::after{background:#e0564a}
+#strip a.th .prog{position:absolute;left:0;bottom:0;height:3px;width:0;background:#e0564a;z-index:1}
+#peek{position:fixed;top:calc(var(--strip) + 6px);left:12px;z-index:11;display:none;pointer-events:none;background:var(--bg);border:1px solid var(--line);border-radius:6px;box-shadow:0 8px 30px rgba(0,0,0,.18);padding:8px;width:520px}
+#peek img{width:100%;display:block;border-radius:3px}
+#peek .cap{font-size:14px;color:var(--muted);margin-top:6px;display:flex;justify-content:space-between}
+#peek .cap b{color:var(--fg);font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:calc(var(--strip) + 28px) 28px 120px}
+header h1{font-size:28px;margin:0 0 4px;letter-spacing:-.01em}
+.norec{font-size:14px;color:var(--muted);margin:-6px 0 22px}
+header .src{font-size:14px;color:var(--muted);margin-bottom:18px}
+header .src a{color:var(--muted);text-decoration:underline;text-decoration-color:var(--line)}
+.overview{max-width:760px;font-size:18px;color:var(--fg);margin-bottom:40px}
+h2.sec{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:56px 0 8px;padding-top:12px;border-top:1px solid var(--line)}
+.slide{display:grid;grid-template-columns:minmax(300px,46%) 1fr;gap:34px;padding:22px 0 26px;scroll-margin-top:calc(var(--strip) + 14px)}
+.slide .pic{position:sticky;top:calc(var(--strip) + 16px);align-self:start}
+.slide .pic img{width:100%;display:block;border:1px solid var(--line);border-radius:4px;background:#fff}
+.slide .pic .meta{display:flex;gap:12px;align-items:center;font-size:13px;color:var(--muted);margin-top:8px;font-variant-numeric:tabular-nums}
+.slide .pic .meta a{color:var(--muted)}
+.slide h3{font-size:20px;margin:0 0 10px;font-weight:600;letter-spacing:-.005em}
+.slide h3 .n{color:var(--muted);font-weight:400;font-size:14px;margin-right:10px;font-variant-numeric:tabular-nums}
+.slide .txt p{margin:0 0 12px;max-width:62ch}
+.slide .txt{font-size:17px}
+.slide .txt a[href*="youtu"]{color:var(--muted);font-size:14px}
+button.play{all:unset;cursor:pointer;color:var(--muted);font-size:13px;padding:2px 8px;border:1px solid var(--line);border-radius:12px;line-height:1.4;font-variant-numeric:tabular-nums}
+button.play:hover{color:var(--fg);border-color:var(--muted)}
+button.play.on{color:#e0564a;border-color:#e0564a}button.play.on.paused{color:var(--fg);border-color:var(--muted)}
+#player{display:none}
+nav.lecnav{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-top:60px;border-top:1px solid var(--line);padding-top:14px}
+@media(max-width:860px){.slide{grid-template-columns:1fr}.slide .pic{position:static}#peek{display:none!important}}
+/* index */
+main.toc{max-width:760px;padding-top:36px}
+main.toc .sub{font-size:17px;margin:2px 0 4px}
+.home-link{font-size:14px;color:var(--muted)}
+main.toc h2.sec{margin:26px 0 4px;padding-top:0;border-top:0}
+.lec{display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;padding:3px 6px;margin:0 -6px;border-radius:4px;color:var(--fg)}
+.lec:hover{background:var(--thumb-bg);text-decoration:none}
+.lec .n{color:var(--muted);font-variant-numeric:tabular-nums;font-size:14px}.lec .t{font-size:16px}.lec .m{font-size:13px;color:var(--muted)}
+main.doc{max-width:720px;padding-top:28px}main.doc li{margin:4px 0}main.doc h2{font-size:19px;margin:30px 0 8px}</style></head><body>
+<div class="corner"><button class="theme" onclick="toggleTheme()" title="Light / dark">◐</button></div><main class="doc"><a href="index.html" class="home-link">⌂ all lectures</a><h1>Transcription method</h1>
+<p>Each lecture page is a <strong>lightly edited transcript</strong> of the recorded lecture, lined up with the slides that were on screen.</p>
+<h2>How a page was made</h2>
+<ol>
+<li><strong>Speech to text.</strong> The audio of each YouTube recording was transcribed locally with Whisper (large-v3-turbo, via mlx-whisper). Whisper was given the lecture's slide vocabulary as a prompt, so technical terms come out right more often.</li>
+<li><strong>Matching speech to slides.</strong> One video frame every 2 seconds was compared to the slide-deck pages (perceptual image hashing). That gives the time range each slide was on screen, and the words spoken in that range go with that slide. Lecture 1 used PowerPoint, so its slides were found from changes in the video itself.</li>
+<li>
+<p><strong>Light editing.</strong> A Claude agent edited each slide's stretch of transcript, with the slide text beside it:</p>
+<ul>
+<li>removed: "um", "uh", filler "like" / "you know", stutters, false starts, sentences repeated across slide boundaries;</li>
+<li>fixed: speech-recognition errors in technical terms, symbols and numbers, checked against the slide text; math typeset;</li>
+<li>fixed: a few obvious slips of the tongue, where a swapped variable or sign contradicts both the slide and the lecturer's own next sentence;</li>
+<li>added: punctuation and paragraph breaks;</li>
+<li>kept: the lecturer's first person, wording, order, examples, asides and jokes. Nothing was summarized or added.</li>
+</ul>
+<p>Student questions are set off as <strong>Student:</strong>, with the reply as <strong>Roth:</strong>. A question too garbled to recover is a bracketed paraphrase, like [question about …]; any other unrecoverable stretch is marked […].</p>
+</li>
+</ol>
+<h2>Things to know</h2>
+<ul>
+<li>When the lecturer flipped back to an earlier slide, that slide appears again in the timeline at the point he returned to it.</li>
+<li>Lecture 18 was given by guest lecturer Sophia Pi. Much of lecture 10 was presented by students, and its speaker labels are best guesses.</li>
+<li>Lectures 12 and 20 have no recording in the YouTube playlist, so their pages show the slides only.</li>
+<li>Lecture 18 was recorded from a slightly different version of the deck than the published PDF; a few slides shown in class are missing from it.</li>
+<li>The edit was done by a model and has not been proofread line by line. When a number or formula matters, check the slide or play the audio.</li>
+</ul>
+<h2>Using the pages</h2>
+<ul>
+<li>The strip at the top is the lecture's timeline: one thumbnail per slide, wider the longer it was on screen. Hover to preview, click to jump. ← / → step through slides. ⌂ goes back to the list of lectures.</li>
+<li>▶ under a slide plays the recording from YouTube, in place of the slide image, for as long as that slide was on screen. Click again (or press space) to pause and resume. "youtube ↗" opens the same moment on YouTube.</li>
+<li>Math is rendered with KaTeX, loaded from the internet.</li>
+</ul></main></body></html>

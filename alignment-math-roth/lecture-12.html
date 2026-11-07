@@ -1,0 +1,201 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><script>try{const t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}
+function toggleTheme(){const d=document.documentElement,dark=d.dataset.theme?d.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;d.dataset.theme=dark?'light':'dark';try{localStorage.setItem('theme',d.dataset.theme)}catch(e){}}</script><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lecture 12: Agreement On What To Do</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false})"></script><style>
+:root{--bg:#fff;--fg:#1a1a1a;--muted:#777;--line:#e6e6e6;--accent:#1f5fbf;--strip:68px;--thumb-bg:#f3f3f3}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#141414;--fg:#e8e8e8;--muted:#9a9a9a;--line:#2c2c2c;--accent:#7fb0ff;--thumb-bg:#222}}
+:root[data-theme=dark]{--bg:#141414;--fg:#e8e8e8;--muted:#9a9a9a;--line:#2c2c2c;--accent:#7fb0ff;--thumb-bg:#222}
+button.theme{all:unset;cursor:pointer;color:var(--muted);font-size:18px;line-height:1;padding:4px 8px}button.theme:hover{color:var(--fg)}
+.ytbox{position:relative;width:100%;min-width:200px;aspect-ratio:16/9}.ytbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:4px}
+.corner{position:fixed;top:10px;right:14px;z-index:12}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+#strip{position:fixed;top:0;left:0;right:0;height:var(--strip);display:flex;gap:2px;padding:4px 6px 6px;background:var(--bg);border-bottom:1px solid var(--line);z-index:10}
+#strip a.home{flex:0 0 auto;display:flex;align-items:center;justify-content:center;width:40px;font-size:22px;color:var(--muted);border-right:1px solid var(--line);margin-right:4px}#strip a.home:hover{color:var(--fg);text-decoration:none}
+#strip .themebox{flex:0 0 auto;display:flex;align-items:center;border-left:1px solid var(--line);margin-left:4px}
+#strip a.th{flex:1 1 0;min-width:10px;height:100%;position:relative;display:block;overflow:hidden;border-radius:3px;background:var(--thumb-bg);opacity:.72;transition:opacity .12s}
+#strip a.th img{width:100%;height:100%;object-fit:cover;object-position:left top;display:block}
+#strip a.th:hover,#strip a.th.cur{opacity:1}
+#strip a.th.cur::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--accent)}
+#strip a.th.playing::after{background:#e0564a}
+#strip a.th .prog{position:absolute;left:0;bottom:0;height:3px;width:0;background:#e0564a;z-index:1}
+#peek{position:fixed;top:calc(var(--strip) + 6px);left:12px;z-index:11;display:none;pointer-events:none;background:var(--bg);border:1px solid var(--line);border-radius:6px;box-shadow:0 8px 30px rgba(0,0,0,.18);padding:8px;width:520px}
+#peek img{width:100%;display:block;border-radius:3px}
+#peek .cap{font-size:14px;color:var(--muted);margin-top:6px;display:flex;justify-content:space-between}
+#peek .cap b{color:var(--fg);font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:calc(var(--strip) + 28px) 28px 120px}
+header h1{font-size:28px;margin:0 0 4px;letter-spacing:-.01em}
+.norec{font-size:14px;color:var(--muted);margin:-6px 0 22px}
+header .src{font-size:14px;color:var(--muted);margin-bottom:18px}
+header .src a{color:var(--muted);text-decoration:underline;text-decoration-color:var(--line)}
+.overview{max-width:760px;font-size:18px;color:var(--fg);margin-bottom:40px}
+h2.sec{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:56px 0 8px;padding-top:12px;border-top:1px solid var(--line)}
+.slide{display:grid;grid-template-columns:minmax(300px,46%) 1fr;gap:34px;padding:22px 0 26px;scroll-margin-top:calc(var(--strip) + 14px)}
+.slide .pic{position:sticky;top:calc(var(--strip) + 16px);align-self:start}
+.slide .pic img{width:100%;display:block;border:1px solid var(--line);border-radius:4px;background:#fff}
+.slide .pic .meta{display:flex;gap:12px;align-items:center;font-size:13px;color:var(--muted);margin-top:8px;font-variant-numeric:tabular-nums}
+.slide .pic .meta a{color:var(--muted)}
+.slide h3{font-size:20px;margin:0 0 10px;font-weight:600;letter-spacing:-.005em}
+.slide h3 .n{color:var(--muted);font-weight:400;font-size:14px;margin-right:10px;font-variant-numeric:tabular-nums}
+.slide .txt p{margin:0 0 12px;max-width:62ch}
+.slide .txt{font-size:17px}
+.slide .txt a[href*="youtu"]{color:var(--muted);font-size:14px}
+button.play{all:unset;cursor:pointer;color:var(--muted);font-size:13px;padding:2px 8px;border:1px solid var(--line);border-radius:12px;line-height:1.4;font-variant-numeric:tabular-nums}
+button.play:hover{color:var(--fg);border-color:var(--muted)}
+button.play.on{color:#e0564a;border-color:#e0564a}button.play.on.paused{color:var(--fg);border-color:var(--muted)}
+#player{display:none}
+nav.lecnav{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-top:60px;border-top:1px solid var(--line);padding-top:14px}
+@media(max-width:860px){.slide{grid-template-columns:1fr}.slide .pic{position:static}#peek{display:none!important}}
+/* index */
+main.toc{max-width:760px;padding-top:36px}
+main.toc .sub{font-size:17px;margin:2px 0 4px}
+.home-link{font-size:14px;color:var(--muted)}
+main.toc h2.sec{margin:26px 0 4px;padding-top:0;border-top:0}
+.lec{display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;padding:3px 6px;margin:0 -6px;border-radius:4px;color:var(--fg)}
+.lec:hover{background:var(--thumb-bg);text-decoration:none}
+.lec .n{color:var(--muted);font-variant-numeric:tabular-nums;font-size:14px}.lec .t{font-size:16px}.lec .m{font-size:13px;color:var(--muted)}
+</style></head><body data-yt="">
+<div id="strip"><a class="home" href="index.html" title="All lectures">⌂</a><a class="th" href="#s1" style="flex-grow:25.6" data-img="img/12/frame-001.png" data-title="Agreement on What to Do" data-time=""><img src="img/12/frame-001.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s2" style="flex-grow:25.6" data-img="img/12/frame-002.png" data-title="From One Probability to Many Possible States" data-time=""><img src="img/12/frame-002.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s3" style="flex-grow:25.6" data-img="img/12/frame-003.png" data-title="A Simpler Target: Agree on What to Do" data-time=""><img src="img/12/frame-003.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s4" style="flex-grow:25.6" data-img="img/12/frame-004.png" data-title="Overview" data-time=""><img src="img/12/frame-004.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s5" style="flex-grow:25.6" data-img="img/12/frame-005.png" data-title="The Parties Share a Utility Function" data-time=""><img src="img/12/frame-005.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s6" style="flex-grow:25.6" data-img="img/12/frame-006.png" data-title="Very Different Forecasts Can Recommend the Same Action" data-time=""><img src="img/12/frame-006.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s7" style="flex-grow:25.6" data-img="img/12/frame-007.png" data-title="What Counts as Agreement on an Action?" data-time=""><img src="img/12/frame-007.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s8" style="flex-grow:25.6" data-img="img/12/frame-008.png" data-title="Two Openings, Then Accept or Counterrecommend" data-time=""><img src="img/12/frame-008.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s9" style="flex-grow:25.6" data-img="img/12/frame-009.png" data-title="Acceptance Certifies a Common Decision" data-time=""><img src="img/12/frame-009.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s10" style="flex-grow:25.6" data-img="img/12/frame-010.png" data-title="The Same Decision Problem Repeats Across Days" data-time=""><img src="img/12/frame-010.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s11" style="flex-grow:25.6" data-img="img/12/frame-011.png" data-title="A Predicted Gain Need Not Be a Realized Gain" data-time=""><img src="img/12/frame-011.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s12" style="flex-grow:25.6" data-img="img/12/frame-012.png" data-title="Conversation Decision Calibration" data-time=""><img src="img/12/frame-012.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s13" style="flex-grow:25.6" data-img="img/12/frame-013.png" data-title="Calibrate Utility Comparisons, Not the Whole Forecast" data-time=""><img src="img/12/frame-013.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s14" style="flex-grow:25.6" data-img="img/12/frame-014.png" data-title="Action Pairs Replace Probability Buckets" data-time=""><img src="img/12/frame-014.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s15" style="flex-grow:25.6" data-img="img/12/frame-015.png" data-title="Calibrated Recommendations Give Short Conversations" data-time=""><img src="img/12/frame-015.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s16" style="flex-grow:25.6" data-img="img/12/frame-016.png" data-title="Why 1/ε Rather Than 1/ε²?" data-time=""><img src="img/12/frame-016.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s17" style="flex-grow:25.6" data-img="img/12/frame-017.png" data-title="Track the Action Actually Retained" data-time=""><img src="img/12/frame-017.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s18" style="flex-grow:25.6" data-img="img/12/frame-018.png" data-title="Every Unresolved Reply Forces Utility Progress" data-time=""><img src="img/12/frame-018.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s19" style="flex-grow:25.6" data-img="img/12/frame-019.png" data-title="Bounded Utility Limits Unresolved Conversations" data-time=""><img src="img/12/frame-019.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s20" style="flex-grow:25.6" data-img="img/12/frame-020.png" data-title="Does Agreement Improve on Both Opening Decisions?" data-time=""><img src="img/12/frame-020.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s21" style="flex-grow:25.6" data-img="img/12/frame-021.png" data-title="One Extra Check Compares with the AI&#x27;s Opening" data-time=""><img src="img/12/frame-021.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s22" style="flex-grow:25.6" data-img="img/12/frame-022.png" data-title="The First Reply Matches the Better Opening, Up to ε" data-time=""><img src="img/12/frame-022.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s23" style="flex-grow:25.6" data-img="img/12/frame-023.png" data-title="The Same Progress Improves on the Better Opening" data-time=""><img src="img/12/frame-023.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s24" style="flex-grow:25.6" data-img="img/12/frame-024.png" data-title="Approximate Calibration Adds an Error Allowance" data-time=""><img src="img/12/frame-024.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s25" style="flex-grow:25.6" data-img="img/12/frame-025.png" data-title="The Same Proof Gives Approximate Guarantees" data-time=""><img src="img/12/frame-025.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s26" style="flex-grow:25.6" data-img="img/12/frame-026.png" data-title="Learning Conversation Decision Calibration Online" data-time=""><img src="img/12/frame-026.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s27" style="flex-grow:25.6" data-img="img/12/frame-027.png" data-title="Learn Each Reply from Repeated Outcome Feedback" data-time=""><img src="img/12/frame-027.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s28" style="flex-grow:25.6" data-img="img/12/frame-028.png" data-title="Each Utility Comparison Supplies a Pairwise Error" data-time=""><img src="img/12/frame-028.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s29" style="flex-grow:25.6" data-img="img/12/frame-029.png" data-title="Approachability Leaves One Forecasting Problem" data-time=""><img src="img/12/frame-029.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s30" style="flex-grow:25.6" data-img="img/12/frame-030.png" data-title="The Enlarged Target Allows Computational Error" data-time=""><img src="img/12/frame-030.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s31" style="flex-grow:25.6" data-img="img/12/frame-031.png" data-title="Using No Regret to Compute the Forecast" data-time=""><img src="img/12/frame-031.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s32" style="flex-grow:25.6" data-img="img/12/frame-032.png" data-title="Copying Gives the Response Needed for Self-Play" data-time=""><img src="img/12/frame-032.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s33" style="flex-grow:25.6" data-img="img/12/frame-033.png" data-title="Review: Zero Payoff and Low Regret Give Robustness" data-time=""><img src="img/12/frame-033.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s34" style="flex-grow:25.6" data-img="img/12/frame-034.png" data-title="Self-Play Computes the Forecasting Distribution" data-time=""><img src="img/12/frame-034.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s35" style="flex-grow:25.6" data-img="img/12/frame-035.png" data-title="Lecture 11&#x27;s Bound Now Controls Utility Errors" data-time=""><img src="img/12/frame-035.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s36" style="flex-grow:25.6" data-img="img/12/frame-036.png" data-title="Learned Calibration Can Improve on Both Openings" data-time=""><img src="img/12/frame-036.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s37" style="flex-grow:25.6" data-img="img/12/frame-037.png" data-title="Summary" data-time=""><img src="img/12/frame-037.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s38" style="flex-grow:25.6" data-img="img/12/frame-038.png" data-title="Thanks!" data-time=""><img src="img/12/frame-038.png" alt="" loading="eager"><span class="prog"></span></a><a class="th" href="#s39" style="flex-grow:25.6" data-img="img/12/frame-039.png" data-title="References" data-time=""><img src="img/12/frame-039.png" alt="" loading="eager"><span class="prog"></span></a><span class="themebox"><button class="theme" onclick="toggleTheme()" title="Light / dark">◐</button></span></div>
+<div id="peek"><img alt=""><div class="cap"><b></b><span></span></div></div>
+<main><header><h1>Lecture 12: Agreement On What To Do</h1><div class="src">Slides: <a href="https://aaroth.github.io/cis-7000-ai-alignment/slides/lecture-12-agreement-on-what-to-do.pdf">lecture-12-agreement-on-what-to-do.pdf</a></div><div class="norec">No recording in the YouTube playlist: slides only.</div></header>
+<div class="overview"></div>
+<section class="slide" id="s1">
+<div class="pic"><img src="img/12/frame-001.png" alt="Slide 1"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">1</span>Agreement on What to Do</h3></div>
+</section><section class="slide" id="s2">
+<div class="pic"><img src="img/12/frame-002.png" alt="Slide 2"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">2</span>From One Probability to Many Possible States</h3></div>
+</section><section class="slide" id="s3">
+<div class="pic"><img src="img/12/frame-003.png" alt="Slide 3"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">3</span>A Simpler Target: Agree on What to Do</h3></div>
+</section><section class="slide" id="s4">
+<div class="pic"><img src="img/12/frame-004.png" alt="Slide 4"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">4</span>Overview</h3></div>
+</section><section class="slide" id="s5">
+<div class="pic"><img src="img/12/frame-005.png" alt="Slide 5"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">5</span>The Parties Share a Utility Function</h3></div>
+</section><section class="slide" id="s6">
+<div class="pic"><img src="img/12/frame-006.png" alt="Slide 6"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">6</span>Very Different Forecasts Can Recommend the Same Action</h3></div>
+</section><section class="slide" id="s7">
+<div class="pic"><img src="img/12/frame-007.png" alt="Slide 7"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">7</span>What Counts as Agreement on an Action?</h3></div>
+</section><section class="slide" id="s8">
+<div class="pic"><img src="img/12/frame-008.png" alt="Slide 8"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">8</span>Two Openings, Then Accept or Counterrecommend</h3></div>
+</section><section class="slide" id="s9">
+<div class="pic"><img src="img/12/frame-009.png" alt="Slide 9"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">9</span>Acceptance Certifies a Common Decision</h3></div>
+</section><section class="slide" id="s10">
+<div class="pic"><img src="img/12/frame-010.png" alt="Slide 10"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">10</span>The Same Decision Problem Repeats Across Days</h3></div>
+</section><section class="slide" id="s11">
+<div class="pic"><img src="img/12/frame-011.png" alt="Slide 11"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">11</span>A Predicted Gain Need Not Be a Realized Gain</h3></div>
+</section><section class="slide" id="s12">
+<div class="pic"><img src="img/12/frame-012.png" alt="Slide 12"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">12</span>Conversation Decision Calibration</h3></div>
+</section><section class="slide" id="s13">
+<div class="pic"><img src="img/12/frame-013.png" alt="Slide 13"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">13</span>Calibrate Utility Comparisons, Not the Whole Forecast</h3></div>
+</section><section class="slide" id="s14">
+<div class="pic"><img src="img/12/frame-014.png" alt="Slide 14"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">14</span>Action Pairs Replace Probability Buckets</h3></div>
+</section><section class="slide" id="s15">
+<div class="pic"><img src="img/12/frame-015.png" alt="Slide 15"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">15</span>Calibrated Recommendations Give Short Conversations</h3></div>
+</section><section class="slide" id="s16">
+<div class="pic"><img src="img/12/frame-016.png" alt="Slide 16"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">16</span>Why 1/ε Rather Than 1/ε²?</h3></div>
+</section><section class="slide" id="s17">
+<div class="pic"><img src="img/12/frame-017.png" alt="Slide 17"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">17</span>Track the Action Actually Retained</h3></div>
+</section><section class="slide" id="s18">
+<div class="pic"><img src="img/12/frame-018.png" alt="Slide 18"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">18</span>Every Unresolved Reply Forces Utility Progress</h3></div>
+</section><section class="slide" id="s19">
+<div class="pic"><img src="img/12/frame-019.png" alt="Slide 19"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">19</span>Bounded Utility Limits Unresolved Conversations</h3></div>
+</section><section class="slide" id="s20">
+<div class="pic"><img src="img/12/frame-020.png" alt="Slide 20"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">20</span>Does Agreement Improve on Both Opening Decisions?</h3></div>
+</section><section class="slide" id="s21">
+<div class="pic"><img src="img/12/frame-021.png" alt="Slide 21"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">21</span>One Extra Check Compares with the AI&#x27;s Opening</h3></div>
+</section><section class="slide" id="s22">
+<div class="pic"><img src="img/12/frame-022.png" alt="Slide 22"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">22</span>The First Reply Matches the Better Opening, Up to ε</h3></div>
+</section><section class="slide" id="s23">
+<div class="pic"><img src="img/12/frame-023.png" alt="Slide 23"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">23</span>The Same Progress Improves on the Better Opening</h3></div>
+</section><section class="slide" id="s24">
+<div class="pic"><img src="img/12/frame-024.png" alt="Slide 24"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">24</span>Approximate Calibration Adds an Error Allowance</h3></div>
+</section><section class="slide" id="s25">
+<div class="pic"><img src="img/12/frame-025.png" alt="Slide 25"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">25</span>The Same Proof Gives Approximate Guarantees</h3></div>
+</section><section class="slide" id="s26">
+<div class="pic"><img src="img/12/frame-026.png" alt="Slide 26"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">26</span>Learning Conversation Decision Calibration Online</h3></div>
+</section><section class="slide" id="s27">
+<div class="pic"><img src="img/12/frame-027.png" alt="Slide 27"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">27</span>Learn Each Reply from Repeated Outcome Feedback</h3></div>
+</section><section class="slide" id="s28">
+<div class="pic"><img src="img/12/frame-028.png" alt="Slide 28"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">28</span>Each Utility Comparison Supplies a Pairwise Error</h3></div>
+</section><section class="slide" id="s29">
+<div class="pic"><img src="img/12/frame-029.png" alt="Slide 29"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">29</span>Approachability Leaves One Forecasting Problem</h3></div>
+</section><section class="slide" id="s30">
+<div class="pic"><img src="img/12/frame-030.png" alt="Slide 30"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">30</span>The Enlarged Target Allows Computational Error</h3></div>
+</section><section class="slide" id="s31">
+<div class="pic"><img src="img/12/frame-031.png" alt="Slide 31"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">31</span>Using No Regret to Compute the Forecast</h3></div>
+</section><section class="slide" id="s32">
+<div class="pic"><img src="img/12/frame-032.png" alt="Slide 32"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">32</span>Copying Gives the Response Needed for Self-Play</h3></div>
+</section><section class="slide" id="s33">
+<div class="pic"><img src="img/12/frame-033.png" alt="Slide 33"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">33</span>Review: Zero Payoff and Low Regret Give Robustness</h3></div>
+</section><section class="slide" id="s34">
+<div class="pic"><img src="img/12/frame-034.png" alt="Slide 34"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">34</span>Self-Play Computes the Forecasting Distribution</h3></div>
+</section><section class="slide" id="s35">
+<div class="pic"><img src="img/12/frame-035.png" alt="Slide 35"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">35</span>Lecture 11&#x27;s Bound Now Controls Utility Errors</h3></div>
+</section><section class="slide" id="s36">
+<div class="pic"><img src="img/12/frame-036.png" alt="Slide 36"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">36</span>Learned Calibration Can Improve on Both Openings</h3></div>
+</section><section class="slide" id="s37">
+<div class="pic"><img src="img/12/frame-037.png" alt="Slide 37"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">37</span>Summary</h3></div>
+</section><section class="slide" id="s38">
+<div class="pic"><img src="img/12/frame-038.png" alt="Slide 38"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">38</span>Thanks!</h3></div>
+</section><section class="slide" id="s39">
+<div class="pic"><img src="img/12/frame-039.png" alt="Slide 39"><div class="meta"></div></div>
+<div class="txt"><h3><span class="n">39</span>References</h3></div>
+</section>
+<nav class="lecnav"><span>← <a href=lecture-11.2.html>11.2 Tractable Agreement From Calibration</a></span><a href="index.html">all lectures</a><span><a href=lecture-13.html>13 Hallucination and Calibration</a> →</span></nav></main><script>
+const strip=document.getElementById('strip'),peek=document.getElementById('peek'),slides=[...document.querySelectorAll('.slide')],thumbs=[...strip.querySelectorAll('a.th')];
+let cur=null;
+function setCur(i){if(i===cur)return;cur=i;thumbs.forEach((t,k)=>t.classList.toggle('cur',k===i));const t=thumbs[i];if(t){const r=t.getBoundingClientRect(),s=strip.getBoundingClientRect();if(r.left<s.left||r.right>s.right)t.scrollIntoView({block:'nearest',inline:'center'});}}
+function spy(){const line=strip.offsetHeight+Math.min(window.innerHeight*0.33,260);let best=0;for(let i=0;i<slides.length;i++){if(slides[i].getBoundingClientRect().top<=line)best=i;else break;}setCur(best);}
+let tick=false;addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(()=>{spy();tick=false;});}},{passive:true});spy();
+thumbs.forEach((t,i)=>{t.addEventListener('mouseenter',()=>{peek.querySelector('img').src=t.dataset.img;peek.querySelector('.cap b').textContent=t.dataset.title;peek.querySelector('.cap span').textContent=t.dataset.time||'';peek.style.display='block';const w=peek.offsetWidth,x=Math.max(8,Math.min(innerWidth-w-8,t.getBoundingClientRect().left+t.offsetWidth/2-w/2));peek.style.left=x+'px';});t.addEventListener('mouseleave',()=>peek.style.display='none');});
+addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const n=cur+(e.key==='ArrowRight'?1:-1);if(slides[n]){slides[n].scrollIntoView();e.preventDefault();}}else if(e.key===' '&&btn){e.preventDefault();toggle();}});
+
+/* public site: each slide's button swaps the slide image for the embedded YouTube player, starting at that slide's time */
+const VID=document.body.dataset.yt;let yt=null,ytReady=false,active=null,btn=null,stopAt=0,poll=null;
+function onYouTubeIframeAPIReady(){ytReady=true;}
+function setLabel(b,icon){b.textContent=icon+' '+b.dataset.label;}
+function stop(){clearInterval(poll);poll=null;if(yt){try{yt.destroy()}catch(e){}yt=null;}if(btn){btn.classList.remove('on','paused');setLabel(btn,'▶');const pic=btn.closest('.pic');pic.querySelector('.ytbox')?.remove();pic.querySelector('img').style.display='';}thumbs.forEach(t=>{t.classList.remove('playing');t.querySelector('.prog').style.width='0';});active=null;btn=null;}
+function toggle(){if(!yt||!btn||!yt.getPlayerState)return;if(yt.getPlayerState()===1)yt.pauseVideo();else yt.playVideo();}
+document.querySelectorAll('button.play').forEach(b=>b.addEventListener('click',()=>{if(btn===b){toggle();return;}if(!ytReady)return;stop();btn=b;active=+b.dataset.i;stopAt=+b.dataset.end;b.classList.add('on');setLabel(b,'❚❚');thumbs[active].classList.add('playing');
+const pic=b.closest('.pic'),img=pic.querySelector('img'),box=document.createElement('div'),inner=document.createElement('div');box.className='ytbox';box.appendChild(inner);img.style.display='none';pic.insertBefore(box,img);
+yt=new YT.Player(inner,{videoId:VID,width:'100%',height:'100%',playerVars:{start:Math.floor(+b.dataset.start),autoplay:1,playsinline:1,rel:0},events:{onReady:e=>e.target.playVideo(),onStateChange:e=>{if(!btn)return;if(e.data===1){btn.classList.remove('paused');setLabel(btn,'❚❚');}else if(e.data===2){btn.classList.add('paused');setLabel(btn,'▶');}else if(e.data===0)stop();}}});
+poll=setInterval(()=>{if(!yt||!yt.getCurrentTime||!btn)return;const t=yt.getCurrentTime(),s=+btn.dataset.start,f=Math.max(0,Math.min(1,(t-s)/(stopAt-s)));thumbs[active].querySelector('.prog').style.width=(f*100)+'%';if(t>=stopAt)stop();},250);}));
+</script></body></html>
